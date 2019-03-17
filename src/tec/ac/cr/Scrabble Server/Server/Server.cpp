@@ -63,29 +63,25 @@ int Server::run() {
     // While loop: accept and echo message back to client
     char buf[4096];
 
-    while (true)
+    memset(buf, 0, 4096);
+
+    // Wait for client to send data
+    int bytesReceived = recv(clientSocket, buf, 4096, 0);
+
+    if (bytesReceived == -1)
     {
-        memset(buf, 0, 4096);
-
-        // Wait for client to send data
-        int bytesReceived = recv(clientSocket, buf, 4096, 0);
-        if (bytesReceived == -1)
-        {
-            cerr << "Error in recv(). Quitting" << endl;
-            break;
-        }
-
-        if (bytesReceived == 0)
-        {
-            cout << "Client disconnected " << endl;
-            break;
-        }
-
-        cout << string(buf, 0, bytesReceived) << endl;
-
-        // Echo message back to client
-        send(clientSocket, buf, bytesReceived + 1, 0);
+        cerr << "Error in recv(). Quitting" << endl;
     }
+
+    if (bytesReceived == 0)
+    {
+        cout << "Client disconnected " << endl;
+    }
+
+    cout << string(buf, 0, bytesReceived) << endl;
+
+    // Echo message back to client
+    send(clientSocket, buf, bytesReceived + 1, 0);
 
     // Close the socket
     close(clientSocket);
