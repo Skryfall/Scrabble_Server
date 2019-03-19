@@ -54,3 +54,19 @@ void Tail::deleteFirst4() {
         this->head = this->head->next->next->next->next;
     }
 }
+
+bool Tail::searchIP(char ip) {
+    if (this->head == nullptr){
+        return false;
+    }else{
+        TailNode* tmp = this->head;
+        while (tmp != nullptr){
+            if (tmp->getIp() == ip){
+                return true;
+            }else{
+                tmp = tmp->next;
+            }
+        }
+        return false;
+    }
+}

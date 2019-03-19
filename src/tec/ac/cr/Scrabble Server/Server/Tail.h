@@ -21,6 +21,7 @@ public:
     void addToTail(char ip);
     void printTail();
     void deleteFirst4();
+    bool searchIP(char ip);
 
 private:
 
