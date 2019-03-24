@@ -22,6 +22,7 @@ public:
     void printTail();
     void deleteFirst4();
     bool searchIP(char ip);
+    bool searchCurrentPlayers(char ip);
 
 private:
 

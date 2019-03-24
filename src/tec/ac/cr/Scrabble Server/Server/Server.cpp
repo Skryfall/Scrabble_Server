@@ -82,8 +82,10 @@ int Server::run() {
 
         cout << string(buf, 0, bytesReceived) << endl;
 
-        // Echo message back to client
-        send(clientSocket, buf, bytesReceived + 1, 0);
+        if (tail->searchCurrentPlayers(host[NI_MAXHOST])){
+            // Echo message back to client
+            send(clientSocket, buf, bytesReceived + 1, 0);
+        }
 
         // Close the socket
         close(clientSocket);

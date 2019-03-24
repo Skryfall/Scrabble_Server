@@ -70,3 +70,21 @@ bool Tail::searchIP(char ip) {
         return false;
     }
 }
+
+bool Tail::searchCurrentPlayers(char ip) {
+    if (this->head == nullptr){
+        return false;
+    }else{
+        int i = 1;
+        TailNode* tmp = this->head;
+        while (tmp != nullptr || i != 5){
+            if (tmp->getIp() == ip){
+                return true;
+            }else{
+                tmp = tmp->next;
+                i++;
+            }
+        }
+        return false;
+    }
+}
