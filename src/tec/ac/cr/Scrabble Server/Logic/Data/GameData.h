@@ -7,6 +7,7 @@
 
 
 #include "../Lists/Letters/LetterList.h"
+#include "Holder.h"
 
 class GameData {
 
@@ -22,6 +23,7 @@ public:
     void generateRoom();
     Holder* beginGame(Holder* holder);
     Holder* processPlay(Holder* holder);
+    void initialize();
 
 
 private:
@@ -31,7 +33,7 @@ private:
     GameData& operator = (GameData const&) = default;
 
     static GameData* gameData;
-    LetterList letterList = new LetterList;
+    LetterList* letterList = new LetterList;
     int numberOfPlayers = 0;
     int roomCode = 0;
 
