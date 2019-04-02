@@ -14,6 +14,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <string>
+#include <QtCore/QJsonDocument>
 
 using namespace std;
 
@@ -83,25 +84,40 @@ int Server::run() {
         }
 
         string jsonHolder = string(buf, 0, bytesReceived);
-        Holder* holder = Holder::getInstance();
-        holder = holder->deserialize(jsonHolder.c_str());
+        QJsonDocument doc2 = QJsonDocument::fromJson(QByteArray(jsonHolder.c_str()));
+        QJsonObject json = doc2.object();
+
+        Holder* holder = Holder::read(json);
+        QJsonObject json2;
 
         if (gameData->getRoomCode() == 0){
             holder = gameData->beginGame(holder);
-            jsonHolder = holder->serialize();
-            send(clientSocket, jsonHolder.c_str(), jsonHolder.size(), 0);
+            holder->write(json2);
+            QJsonDocument doc(json2);
+            QByteArray ba = doc.toJson();
+            QString qstr = QString(ba);
+            string str = qstr.toStdString();
+            send(clientSocket, str.c_str(), str.size() + 1, 0);
             // Close the socket
             close(clientSocket);
         }else if (holder->getCodeToEnter() == gameData->getRoomCode() && gameData->getNumberOfPlayers() < 5){
             holder = gameData->beginGame(holder);
-            jsonHolder = holder->serialize();
-            send(clientSocket, jsonHolder.c_str(), jsonHolder.size(), 0);
+            holder->write(json2);
+            QJsonDocument doc(json2);
+            QByteArray ba = doc.toJson();
+            QString qstr = QString(ba);
+            string str = qstr.toStdString();
+            send(clientSocket, str.c_str(), str.size() + 1, 0);
             // Close the socket
             close(clientSocket);
         }else if (holder->getCodeToEnter() == gameData->getRoomCode() && tail->searchCurrentPlayers(host[NI_MAXHOST])){
             holder = gameData->processPlay(holder);
-            jsonHolder = holder->serialize();
-            send(clientSocket, jsonHolder.c_str(), jsonHolder.size(), 0);
+            holder->write(json2);
+            QJsonDocument doc(json2);
+            QByteArray ba = doc.toJson();
+            QString qstr = QString(ba);
+            string str = qstr.toStdString();
+            send(clientSocket, str.c_str(), str.size() + 1, 0);
             // Close the socket
             close(clientSocket);
         }else{

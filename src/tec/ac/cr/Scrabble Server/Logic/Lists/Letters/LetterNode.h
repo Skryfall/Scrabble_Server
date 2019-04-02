@@ -6,6 +6,7 @@
 #define SCRABBLE_LETTERNODE_H
 
 #include <string>
+#include <QtCore/QJsonObject>
 #include "../../rapidjson/prettywriter.h"
 
 using namespace std;
@@ -33,10 +34,9 @@ public:
     void setCounters(int counter);
     int getCounters();
     void lowerCounter();
-    string serialize();
-    template<typename Writer>
-    void serializer(Writer& writer) const;
-    LetterNode* deserialize(const char* json);
+
+    void read(const QJsonObject &json);
+    void write(QJsonObject &json) const;
 
 private:
 

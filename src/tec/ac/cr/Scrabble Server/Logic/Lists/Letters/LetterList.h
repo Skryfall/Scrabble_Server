@@ -5,6 +5,7 @@
 #ifndef SCRABBLE_LETTERLIST_H
 #define SCRABBLE_LETTERLIST_H
 
+#include <QtCore/QJsonArray>
 #include "LetterNode.h"
 #include "../../rapidjson/prettywriter.h"
 
@@ -31,10 +32,9 @@ public:
     LetterList* giveLetters(int num);
     void reduceLetter(LetterNode* tmp);
     int findPoint(string letter);
-    string serialize();
-    template<typename Writer>
-    void serializer(Writer& writer) const;
-    LetterList* deserialize(const char* json);
+
+    static LetterList* read(const QJsonObject& json, const QJsonArray& nodesArray);
+    QJsonArray& write(QJsonObject& json, QJsonArray& nodesArray) const;
 
 private:
 

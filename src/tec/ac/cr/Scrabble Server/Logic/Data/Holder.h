@@ -6,6 +6,7 @@
 #define SCRABBLE_HOLDER_H
 
 #include <string>
+#include <QtCore/QJsonObject>
 #include "../rapidjson/prettywriter.h"
 #include "../Lists/Letters/LetterList.h"
 #include "../Lists/Dictionary/WordList.h"
@@ -33,10 +34,9 @@ public:
     void setPlayerName(string playerName);
     int getCodeToEnter();
     void setCodetoEnter(int codeToEnter);
-    string serialize();
-    template<typename Writer>
-    void serializer(Writer& writer) const;
-    Holder* deserialize(const char* json);
+
+    static Holder* read(const QJsonObject &json);
+    void write(QJsonObject& json) const;
 
 private:
 
