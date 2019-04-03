@@ -16,6 +16,10 @@ LastPlayList* LastPlayList::getInstance() {
     return lastPlayList;
 }
 
+void LastPlayList::setInstance(LastPlayList* lastPlayList1) {
+    lastPlayList = lastPlayList1;
+}
+
 int LastPlayList::getLenght() {
     return this->lenght;
 }

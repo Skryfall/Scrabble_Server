@@ -18,6 +18,7 @@ class LastPlayList {
 public:
 
     static LastPlayList* getInstance();
+    static void setInstance(LastPlayList* lastPlayList1);
 
     LastPlayNode* head = nullptr;
 

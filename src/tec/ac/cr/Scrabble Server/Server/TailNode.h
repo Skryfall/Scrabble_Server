@@ -18,10 +18,13 @@ public:
 
     void setIp(char ip);
     char getIp();
+    void setUpdated(bool updated);
+    bool getUpdated();
 
 private:
 
     char ip;
+    bool updated = false;
 
 };
 

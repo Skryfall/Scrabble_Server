@@ -100,8 +100,20 @@ int Server::run() {
             send(clientSocket, str.c_str(), str.size() + 1, 0);
             // Close the socket
             close(clientSocket);
-        }else if (holder->getCodeToEnter() == gameData->getRoomCode() && gameData->getNumberOfPlayers() < 5){
+        }else if (holder->getCodeToEnter() == gameData->getRoomCode() && gameData->getNumberOfPlayers() < gameData->getMaxNumberOfPlayers()){
             holder = gameData->beginGame(holder);
+            holder->write(json2);
+            QJsonDocument doc(json2);
+            QByteArray ba = doc.toJson();
+            QString qstr = QString(ba);
+            string str = qstr.toStdString();
+            send(clientSocket, str.c_str(), str.size() + 1, 0);
+            tail->changeTurns();
+            // Close the socket
+            close(clientSocket);
+        }else if (holder->getCodeToEnter() == gameData->getRoomCode() && tail->searchCurrentPlayers(host[NI_MAXHOST]) && gameData->getNumberOfPlayers() == gameData->getMaxNumberOfPlayers() && holder->getTurn() && tail->checkAllUpdated()){
+            holder = gameData->processPlay(holder);
+            tail->searchPlayer(host[NI_MAXHOST])->setUpdated(true);
             holder->write(json2);
             QJsonDocument doc(json2);
             QByteArray ba = doc.toJson();
@@ -110,8 +122,31 @@ int Server::run() {
             send(clientSocket, str.c_str(), str.size() + 1, 0);
             // Close the socket
             close(clientSocket);
-        }else if (holder->getCodeToEnter() == gameData->getRoomCode() && tail->searchCurrentPlayers(host[NI_MAXHOST])){
-            holder = gameData->processPlay(holder);
+        }else if (!holder->getTurn() && holder->getCodeToEnter() == gameData->getRoomCode() && tail->checkAllUpdated()){
+            if (tail->searchCurrentPlayerTurn() == 1 && tail->numberOfPlayer(host[NI_MAXHOST])){
+                tail->setAllOutdated();
+                holder->setTurn(true);
+            }if (tail->searchCurrentPlayerTurn() == 2 && tail->numberOfPlayer(host[NI_MAXHOST])){
+                tail->setAllOutdated();
+                holder->setTurn(true);
+            }if (tail->searchCurrentPlayerTurn() == 3 && tail->numberOfPlayer(host[NI_MAXHOST])){
+                tail->setAllOutdated();
+                holder->setTurn(true);
+            }if (tail->searchCurrentPlayerTurn() == 4 && tail->numberOfPlayer(host[NI_MAXHOST])){
+                tail->setAllOutdated();
+                holder->setTurn(true);
+            }
+            holder->write(json2);
+            QJsonDocument doc(json2);
+            QByteArray ba = doc.toJson();
+            QString qstr = QString(ba);
+            string str = qstr.toStdString();
+            send(clientSocket, str.c_str(), str.size() + 1, 0);
+            // Close the socket
+            close(clientSocket);
+        }else if (!holder->getTurn() && holder->getCodeToEnter() == gameData->getRoomCode() && !tail->searchPlayer(host[NI_MAXHOST])->getUpdated()){
+            holder->lastPlayList = LastPlayList::getInstance();
+            tail->searchPlayer(host[NI_MAXHOST])->setUpdated(true);
             holder->write(json2);
             QJsonDocument doc(json2);
             QByteArray ba = doc.toJson();
@@ -121,7 +156,7 @@ int Server::run() {
             // Close the socket
             close(clientSocket);
         }else{
-            send(clientSocket, buf, bytesReceived, 0);
+            send(clientSocket, buf, bytesReceived + 1, 0);
             // Close the socket
             close(clientSocket);
         }

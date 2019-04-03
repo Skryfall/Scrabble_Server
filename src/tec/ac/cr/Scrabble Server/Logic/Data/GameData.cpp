@@ -6,6 +6,7 @@
 #include "../Lists/Letters/LetterList.h"
 #include "Holder.h"
 #include "../Lists/Matrix/Matrix.h"
+#include "../../Server/Tail.h"
 
 GameData* GameData::gameData = nullptr;
 
@@ -28,6 +29,14 @@ void GameData::setNumberOfPlayers(int number) {
     this->numberOfPlayers = number;
 }
 
+int GameData::getMaxNumberOfPlayers() {
+    return this->maxNumberOfPlayers;
+}
+
+void GameData::setMaxNumberOfPlayers(int players) {
+    this->maxNumberOfPlayers = players;
+}
+
 int GameData::getRoomCode() {
     return this->roomCode;
 }
@@ -45,15 +54,25 @@ void GameData::generateRoom() {
 }
 
 Holder* GameData::beginGame(Holder* holder) {
+    Tail* tail = Tail::getInstance();
     if (this->numberOfPlayers == 0){
         this->generateRoom();
         holder->setTurn(true);
         this->initialize();
+        if (holder->getPoints() == 4){
+            this->maxNumberOfPlayers = 4;
+        }if (holder->getPoints() == 3){
+            this->maxNumberOfPlayers = 3;
+        }if (holder->getPoints() == 2){
+            this->maxNumberOfPlayers = 2;
+        }
+        holder->setPoints(0);
     }
     this->addPlayer();
     holder->setCodetoEnter(this->roomCode);
     LetterList* letterList = LetterList::getInstance();
     holder->letterList = letterList->giveLetters(8);
+    tail->newPlayer();
     return holder;
 }
 
@@ -74,6 +93,7 @@ Holder* GameData::processPlay(Holder* holder) {
         }
         holder->setTurn(false);
         holder->setPoints(matrix->calculatePoints(holder->lastPlayList, letterList));
+        LastPlayList::setInstance(holder->lastPlayList);
         return holder;
     }else{
         tmp = holder->lastPlayList->head;

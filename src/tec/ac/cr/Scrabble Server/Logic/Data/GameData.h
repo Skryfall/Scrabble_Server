@@ -17,6 +17,8 @@ public:
 
     int getNumberOfPlayers();
     void setNumberOfPlayers(int number);
+    int getMaxNumberOfPlayers();
+    void setMaxNumberOfPlayers(int players);
     int getRoomCode();
     void setRoomCode(int code);
     void addPlayer();
@@ -24,7 +26,6 @@ public:
     Holder* beginGame(Holder* holder);
     Holder* processPlay(Holder* holder);
     void initialize();
-
 
 private:
 
@@ -35,6 +36,7 @@ private:
     static GameData* gameData;
     LetterList* letterList = new LetterList;
     int numberOfPlayers = 0;
+    int maxNumberOfPlayers = 0;
     int roomCode = 0;
 
 };
