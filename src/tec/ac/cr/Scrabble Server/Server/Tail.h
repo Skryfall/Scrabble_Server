@@ -28,7 +28,7 @@ public:
     int getP4();
     void setP4(int p4);
     bool getAllUpdated();
-    void setAllUpdated(bool updated);
+    void setAllUpdated();
     void printTail();
     void deleteFirst4();
     bool searchIP(char ip);

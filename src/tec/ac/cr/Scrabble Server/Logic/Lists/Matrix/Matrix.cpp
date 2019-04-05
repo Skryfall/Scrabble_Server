@@ -221,12 +221,18 @@ bool Matrix::checkPlay(LastPlayList* lastPlayList) {
     LastPlayNode* tmp = lastPlayList->head;
     int firstRow = tmp->getRow();
     int firstColumn = tmp->getColumn();
+    bool check = true;
     tmp = tmp->next;
     while (tmp != nullptr){
-        if (tmp->getRow() != firstRow || tmp->getColumn() != firstColumn){
-            return false;
+        if (tmp->getRow() != firstRow){
+            if (tmp->getColumn() != firstColumn){
+                check = false;
+            }
         }
         tmp = tmp->next;
+    }
+    if (!check){
+        return false;
     }
     tmp = lastPlayList->head;
     while (tmp != nullptr){
@@ -244,14 +250,42 @@ void Matrix::searchWords(int row, int column) {
     int j = column - 1;
     bool horizontal = false;
     bool vertical = false;
-    Node* posva = index(i, column);
-    Node* posvp = index(i + 2, column);
-    Node* posha = index(row, j);
-    Node* poshp = index(row, j + 2);
-    if (!posha->getLetter().empty() || !poshp->getLetter().empty()){
-        horizontal = true;
-    }if (!posva->getLetter().empty() || !posvp->getLetter().empty()){
-        vertical = true;
+    Node* posva = nullptr;
+    Node* posvp = nullptr;
+    Node* posha = nullptr;
+    Node* poshp = nullptr;
+    if (i >= 0){
+        posva = index(i, column);
+    }if (i < 15){
+        posvp = index(i + 2, column);
+    }if (j >= 0){
+        posha = index(row, j);
+    }if (j < 15){
+        poshp = index(row, j + 2);
+    }if (posha == nullptr){
+        if (!poshp->getLetter().empty()){
+            horizontal = true;
+        }
+    }if (poshp == nullptr){
+        if (!posha->getLetter().empty()){
+            horizontal = true;
+        }
+    }if (posha != nullptr && poshp != nullptr){
+        if (!posha->getLetter().empty() || !poshp->getLetter().empty()){
+            horizontal = true;
+        }
+    }if (posva == nullptr){
+        if (!posvp->getLetter().empty()){
+            vertical = true;
+        }
+    }if (posvp == nullptr){
+        if (!posva->getLetter().empty()){
+            vertical = true;
+        }
+    }if (posva != nullptr && posvp != nullptr){
+        if (!posva->getLetter().empty() || !posvp->getLetter().empty()){
+            vertical = true;
+        }
     }if (!horizontal && !vertical){
         cout << "Nel" << endl;
     }else{

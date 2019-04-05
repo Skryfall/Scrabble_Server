@@ -56,6 +56,7 @@ void GameData::generateRoom() {
 Holder* GameData::beginGame(Holder* holder) {
     Tail* tail = Tail::getInstance();
     if (this->numberOfPlayers == 0){
+        tail->setAllUpdated();
         this->generateRoom();
         holder->setTurn(true);
         this->initialize();

@@ -62,8 +62,18 @@ bool Tail::getAllUpdated() {
     return this->allUpdated;
 }
 
-void Tail::setAllUpdated(bool updated) {
-    this->allUpdated = updated;
+void Tail::setAllUpdated() {
+    if (this->head == nullptr){
+        cout << "No hay nada" << endl;
+    }else{
+        TailNode* tmp = this->head;
+        int i = 0;
+        while (tmp != nullptr && i != 5){
+            tmp->setUpdated(true);
+            tmp = tmp->next;
+            i++;
+        }
+    }
 }
 
 void Tail::addToTail(char ip) {
@@ -118,7 +128,7 @@ bool Tail::searchCurrentPlayers(char ip) {
     }else{
         int i = 1;
         TailNode* tmp = this->head;
-        while (tmp != nullptr || i != 5){
+        while (tmp != nullptr && i != 5){
             if (tmp->getIp() == ip){
                 return true;
             }else{
@@ -136,7 +146,7 @@ TailNode* Tail::searchPlayer(char ip) {
     }else{
         int i = 1;
         TailNode* tmp = this->head;
-        while (tmp != nullptr || i != 5){
+        while (tmp != nullptr && i != 5){
             if (tmp->getIp() == ip){
                 return tmp;
             }else{
@@ -154,7 +164,7 @@ int Tail::numberOfPlayer(char ip) {
     }else{
         int i = 1;
         TailNode* tmp = this->head;
-        while (tmp != nullptr || i != 5){
+        while (tmp != nullptr && i != 5){
             if (tmp->getIp() == ip){
                 return i;
             }else{
@@ -169,9 +179,9 @@ int Tail::numberOfPlayer(char ip) {
 void Tail::newPlayer() {
     if (this->p1 == 0){
         this->p1 = 1;
-    }if (this->p2 == 0){
+    }else if (this->p2 == 0){
         this->p2 = 2;
-    }if (this->p3 == 0){
+    }else if (this->p3 == 0){
         this->p3 = 3;
     }else{
         this->p4 = 4;
@@ -221,7 +231,7 @@ bool Tail::checkAllUpdated() {
     }else{
         TailNode* tmp = this->head;
         int i = 0;
-        while (tmp != nullptr || i != 5){
+        while (tmp != nullptr && i != 5){
             if (!tmp->getUpdated()){
                 return false;
             }
@@ -238,7 +248,7 @@ void Tail::setAllOutdated() {
     }else{
         TailNode* tmp = this->head;
         int i = 0;
-        while (tmp != nullptr || i != 5){
+        while (tmp != nullptr && i != 5){
             tmp->setUpdated(false);
             tmp = tmp->next;
             i++;

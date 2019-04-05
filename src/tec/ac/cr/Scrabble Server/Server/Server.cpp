@@ -100,7 +100,7 @@ int Server::run() {
             send(clientSocket, str.c_str(), str.size() + 1, 0);
             // Close the socket
             close(clientSocket);
-        }else if (holder->getCodeToEnter() == gameData->getRoomCode() && gameData->getNumberOfPlayers() < gameData->getMaxNumberOfPlayers()){
+        }else if (holder->getCodeToEnter() == gameData->getRoomCode() && gameData->getNumberOfPlayers() < gameData->getMaxNumberOfPlayers() && !tail->searchCurrentPlayers(host[NI_MAXHOST])){
             holder = gameData->beginGame(holder);
             holder->write(json2);
             QJsonDocument doc(json2);
@@ -108,7 +108,6 @@ int Server::run() {
             QString qstr = QString(ba);
             string str = qstr.toStdString();
             send(clientSocket, str.c_str(), str.size() + 1, 0);
-            tail->changeTurns();
             // Close the socket
             close(clientSocket);
         }else if (holder->getCodeToEnter() == gameData->getRoomCode() && tail->searchCurrentPlayers(host[NI_MAXHOST]) && gameData->getNumberOfPlayers() == gameData->getMaxNumberOfPlayers() && holder->getTurn() && tail->checkAllUpdated()){
@@ -120,6 +119,7 @@ int Server::run() {
             QString qstr = QString(ba);
             string str = qstr.toStdString();
             send(clientSocket, str.c_str(), str.size() + 1, 0);
+            tail->changeTurns();
             // Close the socket
             close(clientSocket);
         }else if (!holder->getTurn() && holder->getCodeToEnter() == gameData->getRoomCode() && tail->checkAllUpdated()){
