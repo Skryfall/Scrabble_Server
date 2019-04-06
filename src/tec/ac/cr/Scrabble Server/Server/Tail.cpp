@@ -79,16 +79,16 @@ void Tail::setAllUpdated() {
 
  //! Method that adds a player to the tail
  //! \param ip of the player that will be added
-void Tail::addToTail(char ip) {
+void Tail::addToTail(string name) {
     if (this->head == nullptr){
-        this->head = new TailNode(ip);
+        this->head = new TailNode(name);
         this->lenght++;
     }else{
         TailNode* tmp = this->head;
         while (tmp->next != nullptr){
             tmp = tmp->next;
         }
-        tmp->next = new TailNode(ip);
+        tmp->next = new TailNode(name);
         this->lenght++;
     }
 }
@@ -97,7 +97,7 @@ void Tail::addToTail(char ip) {
 void Tail::printTail() {
     TailNode* tmp = this->head;
     while (tmp != nullptr){
-        cout << tmp->getIp() << ",";
+        cout << tmp->getName() << ",";
         tmp = tmp->next;
     }
 }
@@ -114,13 +114,13 @@ void Tail::deleteFirst4() {
 //! Method that searches a player from its ip
 //! \param ip that will be used to search a player
 //! \return boolean to know if it exists or not
-bool Tail::searchIP(char ip) {
+bool Tail::searchName(string name) {
     if (this->head == nullptr){
         return false;
     }else{
         TailNode* tmp = this->head;
         while (tmp != nullptr){
-            if (tmp->getIp() == ip){
+            if (tmp->getName() == name){
                 return true;
             }else{
                 tmp = tmp->next;
@@ -133,14 +133,14 @@ bool Tail::searchIP(char ip) {
 //! Method that searches a player that is currently playing
 //! \param ip that will be used to search a player
 //! \return boolean to know if it exists or not
-bool Tail::searchCurrentPlayers(char ip) {
+bool Tail::searchCurrentPlayers(string name) {
     if (this->head == nullptr){
         return false;
     }else{
         int i = 1;
         TailNode* tmp = this->head;
         while (tmp != nullptr && i != 5){
-            if (tmp->getIp() == ip){
+            if (tmp->getName() == name){
                 return true;
             }else{
                 tmp = tmp->next;
@@ -154,14 +154,14 @@ bool Tail::searchCurrentPlayers(char ip) {
  //! Method that searches a player that is currently playing
  //! \param ip that will be used to search a player
  //! \return the node of the player
-TailNode* Tail::searchPlayer(char ip) {
+TailNode* Tail::searchPlayer(string name) {
     if (this->head == nullptr){
         return nullptr;
     }else{
         int i = 1;
         TailNode* tmp = this->head;
         while (tmp != nullptr && i != 5){
-            if (tmp->getIp() == ip){
+            if (tmp->getName() == name){
                 return tmp;
             }else{
                 tmp = tmp->next;
@@ -175,14 +175,14 @@ TailNode* Tail::searchPlayer(char ip) {
 //! Method that searches the number of a player
 //! \param ip that will be used to search a player
 //! \return an integer with the number of the player
-int Tail::numberOfPlayer(char ip) {
+int Tail::numberOfPlayer(string name) {
     if (this->head == nullptr){
         return -1;
     }else{
         int i = 1;
         TailNode* tmp = this->head;
         while (tmp != nullptr && i != 5){
-            if (tmp->getIp() == ip){
+            if (tmp->getName() == name){
                 return i;
             }else{
                 tmp = tmp->next;

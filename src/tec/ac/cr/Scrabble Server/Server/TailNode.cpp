@@ -4,12 +4,12 @@
 
 #include "TailNode.h"
 
-char TailNode::getIp() {
-    return this->ip;
+string TailNode::getName() {
+    return this->name;
 }
 
-void TailNode::setIp(char ip) {
-    this->ip = ip;
+void TailNode::setName(string name) {
+    this->name = name;
 }
 
 bool TailNode::getUpdated() {

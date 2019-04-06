@@ -8,6 +8,8 @@
 
 #include "TailNode.h"
 
+using namespace std;
+
 class Tail {
 
 public:
@@ -18,7 +20,7 @@ public:
 
     int getLenght();
     void setLenght(int lenght);
-    void addToTail(char ip);
+    void addToTail(string ip);
     int getP1();
     void setP1(int p1);
     int getP2();
@@ -31,10 +33,10 @@ public:
     void setAllUpdated();
     void printTail();
     void deleteFirst4();
-    bool searchIP(char ip);
-    bool searchCurrentPlayers(char ip);
-    TailNode* searchPlayer(char ip);
-    int numberOfPlayer(char ip);
+    bool searchName(string name);
+    bool searchCurrentPlayers(string name);
+    TailNode* searchPlayer(string name);
+    int numberOfPlayer(string name);
     void newPlayer();
     void changeTurns();
     int searchCurrentPlayerTurn();
