@@ -18,6 +18,8 @@
 
 using namespace std;
 
+ //! Method that initializes the server
+ //! \return an integer to know if an error happens
 int Server::run() {
 
     Tail* tail = Tail::getInstance();

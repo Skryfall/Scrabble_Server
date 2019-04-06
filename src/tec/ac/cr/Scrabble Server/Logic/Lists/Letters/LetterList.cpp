@@ -20,6 +20,7 @@ LetterList* LetterList::getInstance() {
     return letterList;
 }
 
+ //! Method to add letters to the list
 void LetterList::letterSorter() {
     insertNode("A", 1, 12);
     insertNode("E", 1, 12);
@@ -60,6 +61,10 @@ void LetterList::setLenght(int lenght) {
     this->length = lenght;
 }
 
+ //! Method to add nodes to the list
+ //! \param letter that will be inserted to the list
+ //! \param points of the letter
+ //! \param counter of how many of that letter are
 void LetterList::insertNode(string letter, int points, int counter) {
     if (this->head == nullptr){
         this->head = new LetterNode(letter, points, counter);
@@ -74,6 +79,8 @@ void LetterList::insertNode(string letter, int points, int counter) {
     }
 }
 
+ //! Method that deletes a node from the list
+ //! \param letter that will be deleted from the list
 void LetterList::deleteNode(string letter) {
     if (this->head == nullptr){
         printf("Theres no node to delete");
@@ -94,6 +101,7 @@ void LetterList::deleteNode(string letter) {
     }
 }
 
+ //! Method that prints the list
 void LetterList::printList() {
     if (this->head == nullptr){
         printf("Lista nula");
@@ -106,6 +114,9 @@ void LetterList::printList() {
     }
 }
 
+ //! Method that searchs a LetterNode
+ //! \param num where the letter is
+ //! \return the letterNode that is being searched
 LetterNode* LetterList::searchNode(int num) {
     LetterNode* tmp = this->head;
     for (int i = 0; i != num; i++){
@@ -114,6 +125,9 @@ LetterNode* LetterList::searchNode(int num) {
     return tmp;
 }
 
+ //! Method that gives a LetterList with letters
+ //! \param num of letters that has the list
+ //! \return letterList with the letters that will be given to the player
 LetterList* LetterList::giveLetters(int num) {
     LetterList* letterList1 = new LetterList;
     for(int i = 0; i != num; i++){
@@ -124,6 +138,8 @@ LetterList* LetterList::giveLetters(int num) {
     return letterList1;
 }
 
+ //! Method that reduces the amount of a letter in the list
+ //! \param tmp the node that has the letter
 void LetterList::reduceLetter(LetterNode* tmp) {
     tmp->lowerCounter();
     if (tmp->getCounters() == 0){
@@ -131,6 +147,9 @@ void LetterList::reduceLetter(LetterNode* tmp) {
     }
 }
 
+ //! Method that finds the point value of the letter
+ //! \param letter with the points to be used
+ //! \return integer with the points of the letter
 int LetterList::findPoint(string letter) {
     LetterNode* letterNode = this->head;
     while (letterNode != nullptr){
@@ -141,6 +160,10 @@ int LetterList::findPoint(string letter) {
     }
 }
 
+ //! Method that deserializes a LetterList from a json
+ //! \param json that have the data
+ //! \param nodesArray where all the list data is
+ //! \return LetterList that has the letters of the player
 LetterList* LetterList::read(const QJsonObject& json, const QJsonArray& nodesArray) {
     LetterList* parsedList = new LetterList();
     if (!nodesArray.empty()){
@@ -157,6 +180,10 @@ LetterList* LetterList::read(const QJsonObject& json, const QJsonArray& nodesArr
     }
 }
 
+ //! Method that serializes a LetterList
+ //! \param json where the list will be serialized
+ //! \param nodesArray this is a qt array that converts the linked list to a qt array and saves it
+ //! \return the serialized array
 QJsonArray& LetterList::write(QJsonObject& json, QJsonArray& nodesArray) const {
     if (this->head == nullptr){
         return nodesArray;

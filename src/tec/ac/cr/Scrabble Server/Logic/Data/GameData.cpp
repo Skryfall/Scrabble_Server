@@ -53,6 +53,9 @@ void GameData::generateRoom() {
     this->roomCode = rand() % 100 + 500;
 }
 
+ //! Method that prepares the beginning of the game
+ //! \param holder holder that has the player data
+ //! \return holder with the updated player data
 Holder* GameData::beginGame(Holder* holder) {
     Tail* tail = Tail::getInstance();
     if (this->numberOfPlayers == 0){
@@ -77,6 +80,9 @@ Holder* GameData::beginGame(Holder* holder) {
     return holder;
 }
 
+ //! Method that processes the current play
+ //! \param holder holder that has the player data
+ //! \return holder with the updated data
 Holder* GameData::processPlay(Holder* holder) {
     Matrix* matrix = Matrix::getInstance();
     LastPlayNode* tmp = holder->lastPlayList->head;
@@ -87,6 +93,11 @@ Holder* GameData::processPlay(Holder* holder) {
     bool validated = matrix->checkPlay(holder->lastPlayList);
     holder->setValidatedPlay(validated);
     if (validated){
+        tmp = holder->lastPlayList->head;
+        while (tmp != nullptr){
+            holder->letterList->deleteNode(tmp->getLetter());
+            tmp = tmp->next;
+        }
         int currentLetters = holder->letterList->getLenght();
         if (currentLetters != 8){
             LetterList* letterList = LetterList::getInstance();

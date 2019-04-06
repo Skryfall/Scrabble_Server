@@ -62,6 +62,7 @@ bool Tail::getAllUpdated() {
     return this->allUpdated;
 }
 
+//! Method that puts all the players in an updated state
 void Tail::setAllUpdated() {
     if (this->head == nullptr){
         cout << "No hay nada" << endl;
@@ -76,6 +77,8 @@ void Tail::setAllUpdated() {
     }
 }
 
+ //! Method that adds a player to the tail
+ //! \param ip of the player that will be added
 void Tail::addToTail(char ip) {
     if (this->head == nullptr){
         this->head = new TailNode(ip);
@@ -90,6 +93,7 @@ void Tail::addToTail(char ip) {
     }
 }
 
+//! Method that prints the tail
 void Tail::printTail() {
     TailNode* tmp = this->head;
     while (tmp != nullptr){
@@ -98,6 +102,7 @@ void Tail::printTail() {
     }
 }
 
+//! Method that deletes the first four nodes from the list
 void Tail::deleteFirst4() {
     if (this->head == nullptr){
         printf("Nada que eliminar");
@@ -106,6 +111,9 @@ void Tail::deleteFirst4() {
     }
 }
 
+//! Method that searches a player from its ip
+//! \param ip that will be used to search a player
+//! \return boolean to know if it exists or not
 bool Tail::searchIP(char ip) {
     if (this->head == nullptr){
         return false;
@@ -122,6 +130,9 @@ bool Tail::searchIP(char ip) {
     }
 }
 
+//! Method that searches a player that is currently playing
+//! \param ip that will be used to search a player
+//! \return boolean to know if it exists or not
 bool Tail::searchCurrentPlayers(char ip) {
     if (this->head == nullptr){
         return false;
@@ -140,6 +151,9 @@ bool Tail::searchCurrentPlayers(char ip) {
     }
 }
 
+ //! Method that searches a player that is currently playing
+ //! \param ip that will be used to search a player
+ //! \return the node of the player
 TailNode* Tail::searchPlayer(char ip) {
     if (this->head == nullptr){
         return nullptr;
@@ -158,6 +172,9 @@ TailNode* Tail::searchPlayer(char ip) {
     }
 }
 
+//! Method that searches the number of a player
+//! \param ip that will be used to search a player
+//! \return an integer with the number of the player
 int Tail::numberOfPlayer(char ip) {
     if (this->head == nullptr){
         return -1;
@@ -176,6 +193,7 @@ int Tail::numberOfPlayer(char ip) {
     }
 }
 
+//! Method that adds a player to the game
 void Tail::newPlayer() {
     if (this->p1 == 0){
         this->p1 = 1;
@@ -188,6 +206,7 @@ void Tail::newPlayer() {
     }
 }
 
+//! Method that changes players turns
 void Tail::changeTurns() {
     GameData* gameData = GameData::getInstance();
     if (this->p1 == 1){
@@ -213,6 +232,8 @@ void Tail::changeTurns() {
     }
 }
 
+//! Method that searches the current player turn
+//! \return an integer with the current number of player that has an active turn
 int Tail::searchCurrentPlayerTurn() {
     if (this->p1 == 1){
         return 1;
@@ -225,6 +246,8 @@ int Tail::searchCurrentPlayerTurn() {
     }
 }
 
+//! Method that checks if all the players are updated
+//! \return boolean to know if all of them are updated or not
 bool Tail::checkAllUpdated() {
     if (this->head == nullptr){
         return false;
@@ -242,6 +265,7 @@ bool Tail::checkAllUpdated() {
     }
 }
 
+//! Method that sets all the players to outdated
 void Tail::setAllOutdated() {
     if (this->head == nullptr){
         cout << "No hay nada" << endl;
