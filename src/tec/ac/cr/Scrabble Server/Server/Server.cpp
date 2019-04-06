@@ -102,7 +102,7 @@ int Server::run() {
             send(clientSocket, str.c_str(), str.size() + 1, 0);
             // Close the socket
             close(clientSocket);
-        }else if (holder->getCodeToEnter() == gameData->getRoomCode() && gameData->getNumberOfPlayers() < gameData->getMaxNumberOfPlayers() && !tail->searchCurrentPlayers(holder->getPlayerName())){
+        }else if (holder->getCodeToEnter() == gameData->getRoomCode() && gameData->getNumberOfPlayers() < gameData->getMaxNumberOfPlayers() && !tail->searchLastJoined(holder->getPlayerName())){
             holder = gameData->beginGame(holder);
             holder->write(json2);
             QJsonDocument doc(json2);
@@ -124,7 +124,7 @@ int Server::run() {
             tail->changeTurns();
             // Close the socket
             close(clientSocket);
-        }else if (!holder->getTurn() && holder->getCodeToEnter() == gameData->getRoomCode() && tail->checkAllUpdated()){
+        }else if (!holder->getTurn() && holder->getCodeToEnter() == gameData->getRoomCode() && tail->checkAllUpdated() && gameData->getNumberOfPlayers() == gameData->getMaxNumberOfPlayers()){
             if (tail->searchCurrentPlayerTurn() == 1 && tail->numberOfPlayer(holder->getPlayerName())){
                 tail->setAllOutdated();
                 holder->setTurn(true);
@@ -146,7 +146,7 @@ int Server::run() {
             send(clientSocket, str.c_str(), str.size() + 1, 0);
             // Close the socket
             close(clientSocket);
-        }else if (!holder->getTurn() && holder->getCodeToEnter() == gameData->getRoomCode() && !tail->searchPlayer(holder->getPlayerName())->getUpdated()){
+        }else if (gameData->getNumberOfPlayers() == gameData->getMaxNumberOfPlayers() && !holder->getTurn() && holder->getCodeToEnter() == gameData->getRoomCode() && !tail->searchPlayer(holder->getPlayerName())->getUpdated()){
             holder->lastPlayList = LastPlayList::getInstance();
             tail->searchPlayer(holder->getPlayerName())->setUpdated(true);
             holder->write(json2);

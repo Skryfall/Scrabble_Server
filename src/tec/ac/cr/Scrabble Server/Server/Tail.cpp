@@ -151,6 +151,24 @@ bool Tail::searchCurrentPlayers(string name) {
     }
 }
 
+bool Tail::searchLastJoined(string name) {
+    if (this->head == nullptr){
+        return false;
+    }else{
+        int i = 1;
+        TailNode* tmp = this->head;
+        while (tmp->next != nullptr && i != 5){
+            if (tmp->getName() == name){
+                return true;
+            }else{
+                tmp = tmp->next;
+                i++;
+            }
+        }
+        return false;
+    }
+}
+
  //! Method that searches a player that is currently playing
  //! \param ip that will be used to search a player
  //! \return the node of the player

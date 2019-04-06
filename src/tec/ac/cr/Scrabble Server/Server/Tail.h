@@ -35,6 +35,7 @@ public:
     void deleteFirst4();
     bool searchName(string name);
     bool searchCurrentPlayers(string name);
+    bool searchLastJoined(string name);
     TailNode* searchPlayer(string name);
     int numberOfPlayer(string name);
     void newPlayer();
