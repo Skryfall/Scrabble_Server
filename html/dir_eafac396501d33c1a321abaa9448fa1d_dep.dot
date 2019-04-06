@@ -1,0 +1,9 @@
+digraph "src/tec/ac/cr/Scrabble Server/Logic/rapidjson/error" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_53fe55a6fa5d8a93131bcb1db0ab065b {
+    graph [ bgcolor="#ddddee", pencolor="black", label="rapidjson" fontname="Helvetica", fontsize="10", URL="dir_53fe55a6fa5d8a93131bcb1db0ab065b.html"]
+  dir_eafac396501d33c1a321abaa9448fa1d [shape=box, label="error", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_eafac396501d33c1a321abaa9448fa1d.html"];
+  }
+}

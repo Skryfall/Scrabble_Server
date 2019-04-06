@@ -1,0 +1,16 @@
+digraph "src/tec/ac/cr/Scrabble Server/Logic/rapidjson" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_e31e1c9d63a67089b01285c1bd60b98a {
+    graph [ bgcolor="#ddddee", pencolor="black", label="Logic" fontname="Helvetica", fontsize="10", URL="dir_e31e1c9d63a67089b01285c1bd60b98a.html"]
+  subgraph clusterdir_53fe55a6fa5d8a93131bcb1db0ab065b {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_53fe55a6fa5d8a93131bcb1db0ab065b.html"];
+    dir_53fe55a6fa5d8a93131bcb1db0ab065b [shape=plaintext label="rapidjson"];
+    dir_eafac396501d33c1a321abaa9448fa1d [shape=box label="error" color="black" fillcolor="white" style="filled" URL="dir_eafac396501d33c1a321abaa9448fa1d.html"];
+    dir_d6031bce846355183569adf9df9998f7 [shape=box label="internal" color="black" fillcolor="white" style="filled" URL="dir_d6031bce846355183569adf9df9998f7.html"];
+    dir_85b5a253194e1558966209e95cc0ac0b [shape=box label="msinttypes" color="black" fillcolor="white" style="filled" URL="dir_85b5a253194e1558966209e95cc0ac0b.html"];
+  }
+  }
+  dir_53fe55a6fa5d8a93131bcb1db0ab065b->dir_eafac396501d33c1a321abaa9448fa1d [headlabel="1", labeldistance=1.5 headhref="dir_000011_000012.html"];
+}

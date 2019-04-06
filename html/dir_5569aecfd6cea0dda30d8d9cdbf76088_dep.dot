@@ -1,0 +1,11 @@
+digraph "src/tec/ac/cr/Scrabble Server/Logic/Data" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_e31e1c9d63a67089b01285c1bd60b98a {
+    graph [ bgcolor="#ddddee", pencolor="black", label="Logic" fontname="Helvetica", fontsize="10", URL="dir_e31e1c9d63a67089b01285c1bd60b98a.html"]
+  dir_5569aecfd6cea0dda30d8d9cdbf76088 [shape=box, label="Data", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_5569aecfd6cea0dda30d8d9cdbf76088.html"];
+  }
+  dir_53fe55a6fa5d8a93131bcb1db0ab065b [shape=box label="rapidjson" fillcolor="white" style="filled" color="red" URL="dir_53fe55a6fa5d8a93131bcb1db0ab065b.html"];
+  dir_5569aecfd6cea0dda30d8d9cdbf76088->dir_53fe55a6fa5d8a93131bcb1db0ab065b [headlabel="1", labeldistance=1.5 headhref="dir_000006_000011.html"];
+}

@@ -1,0 +1,18 @@
+digraph "src/tec/ac/cr/Scrabble Server/Logic/Lists" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_e31e1c9d63a67089b01285c1bd60b98a {
+    graph [ bgcolor="#ddddee", pencolor="black", label="Logic" fontname="Helvetica", fontsize="10", URL="dir_e31e1c9d63a67089b01285c1bd60b98a.html"]
+  subgraph clusterdir_47e1e03c52f8af166058cad42d8f60ce {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_47e1e03c52f8af166058cad42d8f60ce.html"];
+    dir_47e1e03c52f8af166058cad42d8f60ce [shape=plaintext label="Lists"];
+    dir_cfb2adc6c337a5d44ebb038345e52b13 [shape=box label="Dictionary" color="black" fillcolor="white" style="filled" URL="dir_cfb2adc6c337a5d44ebb038345e52b13.html"];
+    dir_0bcc91dc5f3e3727f0d49af37e88bfcb [shape=box label="Letters" color="black" fillcolor="white" style="filled" URL="dir_0bcc91dc5f3e3727f0d49af37e88bfcb.html"];
+    dir_c83d415616d17876c756c6b89c8a9b1a [shape=box label="Matrix" color="black" fillcolor="white" style="filled" URL="dir_c83d415616d17876c756c6b89c8a9b1a.html"];
+  }
+  }
+  dir_53fe55a6fa5d8a93131bcb1db0ab065b [shape=box label="rapidjson" fillcolor="white" style="filled" color="red" URL="dir_53fe55a6fa5d8a93131bcb1db0ab065b.html"];
+  dir_c83d415616d17876c756c6b89c8a9b1a->dir_53fe55a6fa5d8a93131bcb1db0ab065b [headlabel="2", labeldistance=1.5 headhref="dir_000010_000011.html"];
+  dir_0bcc91dc5f3e3727f0d49af37e88bfcb->dir_53fe55a6fa5d8a93131bcb1db0ab065b [headlabel="2", labeldistance=1.5 headhref="dir_000009_000011.html"];
+}
