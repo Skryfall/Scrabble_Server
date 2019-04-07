@@ -101,7 +101,12 @@ Holder* GameData::processPlay(Holder* holder) {
         int currentLetters = holder->letterList->getLenght();
         if (currentLetters != 8){
             LetterList* letterList = LetterList::getInstance();
-            holder->letterList = letterList->giveLetters(8 - currentLetters);
+            LetterList* dummyList = letterList->giveLetters(8 - currentLetters);
+            LetterNode* tmp = dummyList->head;
+            while (tmp != nullptr){
+                holder->letterList->insertNode(tmp->getLetter(), tmp->getPoints(), tmp->getCounters());
+                tmp = tmp->next;
+            }
         }
         holder->setTurn(false);
         holder->setPoints(matrix->calculatePoints(holder->lastPlayList, letterList));
