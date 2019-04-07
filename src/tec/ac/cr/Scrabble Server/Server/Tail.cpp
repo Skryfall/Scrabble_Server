@@ -152,8 +152,8 @@ bool Tail::searchCurrentPlayers(string name) {
 }
 
 bool Tail::searchLastJoined(string name) {
-    if (this->head == nullptr){
-        return false;
+    if (this->head->next == nullptr){
+        return this->head->getName() == name;
     }else{
         int i = 1;
         TailNode* tmp = this->head;
@@ -232,12 +232,12 @@ void Tail::changeTurns() {
         this->p2--;
         this->p3--;
         this->p4--;
-    }if (this->p2 == 1){
+    }else if (this->p2 == 1){
         this->p1--;
         this->p2 = gameData->getMaxNumberOfPlayers();
         this->p3--;
         this->p4--;
-    }if (this->p3 == 1){
+    }else if (this->p3 == 1){
         this->p1--;
         this->p2--;
         this->p3 = gameData->getMaxNumberOfPlayers();
@@ -255,9 +255,9 @@ void Tail::changeTurns() {
 int Tail::searchCurrentPlayerTurn() {
     if (this->p1 == 1){
         return 1;
-    }if (this->p2 == 1){
+    }else if (this->p2 == 1){
         return 2;
-    }if (this->p3 == 1){
+    }else if (this->p3 == 1){
         return 3;
     }else{
         return 4;

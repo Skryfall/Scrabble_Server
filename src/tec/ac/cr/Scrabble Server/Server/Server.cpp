@@ -114,7 +114,10 @@ int Server::run() {
             close(clientSocket);
         }else if (holder->getCodeToEnter() == gameData->getRoomCode() && tail->searchCurrentPlayers(holder->getPlayerName()) && gameData->getNumberOfPlayers() == gameData->getMaxNumberOfPlayers() && holder->getTurn() && tail->checkAllUpdated()){
             holder = gameData->processPlay(holder);
-            tail->searchPlayer(holder->getPlayerName())->setUpdated(true);
+            if (holder->getValidatedPlay()){
+                tail->setAllOutdated();
+                tail->searchPlayer(holder->getPlayerName())->setUpdated(true);
+            }
             holder->write(json2);
             QJsonDocument doc(json2);
             QByteArray ba = doc.toJson();
@@ -125,17 +128,13 @@ int Server::run() {
             // Close the socket
             close(clientSocket);
         }else if (!holder->getTurn() && holder->getCodeToEnter() == gameData->getRoomCode() && tail->checkAllUpdated() && gameData->getNumberOfPlayers() == gameData->getMaxNumberOfPlayers()){
-            if (tail->searchCurrentPlayerTurn() == 1 && tail->numberOfPlayer(holder->getPlayerName())){
-                tail->setAllOutdated();
+            if (tail->searchCurrentPlayerTurn() == 1 && tail->numberOfPlayer(holder->getPlayerName()) == 1){
                 holder->setTurn(true);
-            }if (tail->searchCurrentPlayerTurn() == 2 && tail->numberOfPlayer(holder->getPlayerName())){
-                tail->setAllOutdated();
+            }if (tail->searchCurrentPlayerTurn() == 2 && tail->numberOfPlayer(holder->getPlayerName()) == 2){
                 holder->setTurn(true);
-            }if (tail->searchCurrentPlayerTurn() == 3 && tail->numberOfPlayer(holder->getPlayerName())){
-                tail->setAllOutdated();
+            }if (tail->searchCurrentPlayerTurn() == 3 && tail->numberOfPlayer(holder->getPlayerName()) == 3){
                 holder->setTurn(true);
-            }if (tail->searchCurrentPlayerTurn() == 4 && tail->numberOfPlayer(holder->getPlayerName())){
-                tail->setAllOutdated();
+            }if (tail->searchCurrentPlayerTurn() == 4 && tail->numberOfPlayer(holder->getPlayerName()) == 4){
                 holder->setTurn(true);
             }
             holder->write(json2);
