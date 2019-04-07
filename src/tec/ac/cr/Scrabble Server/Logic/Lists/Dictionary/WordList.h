@@ -24,6 +24,7 @@ public:
     bool searchWord(string word);
     bool searchDuplicates(string word);
     bool checkWordsInList();
+    string toLowerCase(string word);
 
 private:
 

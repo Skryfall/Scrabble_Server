@@ -47,8 +47,9 @@ void WordList::addWord(string word) {
  //! \param word that will be searched
  //! \return boolean to know if the word exists or not
 bool WordList::searchWord(string word) {
+    word = this->toLowerCase(word);
     ifstream fin;
-    fin.open("/home/kevin/CLionProjects/Scrabble/src/tec/ac/cr/Scrabble/Logic/Lists/Dictionary/words.text");
+    fin.open("/home/kevin/CLionProjects/Scrabble Server/src/tec/ac/cr/Scrabble Server/Logic/Lists/Dictionary/words.text");
     if (fin.fail()) {
         cout << "No hay ni pinga.\n";
         return false;
@@ -116,4 +117,13 @@ bool WordList::checkWordsInList() {
         }
         return true;
     }
+}
+
+string WordList::toLowerCase(string word) {
+    locale loc;
+    string str;
+    for(int i = 0; i < word.length(); ++i){
+        str += tolower(word[i], loc);
+    }
+    return str;
 }
