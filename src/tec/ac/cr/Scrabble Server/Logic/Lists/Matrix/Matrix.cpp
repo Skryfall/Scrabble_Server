@@ -344,12 +344,18 @@ void Matrix::searchWords(int row, int column) {
 //! \param lastPlayList list of the last play of the player
 //! \param letterList list with the letters of the player
 //! \return integer with the points of the player
-int Matrix::calculatePoints(LastPlayList* lastPlayList, LetterList* letterList) {
-    int points = 0;
+int Matrix::calculatePoints(LastPlayList* lastPlayList, LetterList* letterList, int points) {
     LastPlayNode* tmp = lastPlayList->head;
+    int a;
     while (tmp != nullptr){
-        points += (index(tmp->getRow(), tmp->getColumn())->getMultiplier() * letterList->findPoint(tmp->getLetter()));
-        tmp = tmp->next;
+        a = index(tmp->getRow(), tmp->getColumn())->getMultiplier();
+        if (a == 0){
+            points += letterList->findPoint(tmp->getLetter());
+            tmp = tmp->next;
+        }else{
+            points += a * letterList->findPoint(tmp->getLetter());
+            tmp = tmp->next;
+        }
     }
     return points;
 }

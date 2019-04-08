@@ -91,6 +91,7 @@ Holder* GameData::processPlay(Holder* holder) {
         tmp = tmp->next;
     }
     bool validated = matrix->checkPlay(holder->lastPlayList);
+    WordList::reset();
     holder->setValidatedPlay(validated);
     if (validated){
         tmp = holder->lastPlayList->head;
@@ -109,7 +110,7 @@ Holder* GameData::processPlay(Holder* holder) {
             }
         }
         holder->setTurn(false);
-        holder->setPoints(matrix->calculatePoints(holder->lastPlayList, letterList));
+        holder->setPoints(matrix->calculatePoints(holder->lastPlayList, letterList, holder->getPoints()));
         LastPlayList::setInstance(holder->lastPlayList);
         return holder;
     }else{

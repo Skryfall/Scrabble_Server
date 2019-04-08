@@ -117,6 +117,7 @@ int Server::run() {
             if (holder->getValidatedPlay()){
                 tail->setAllOutdated();
                 tail->searchPlayer(holder->getPlayerName())->setUpdated(true);
+                tail->changeTurns();
             }
             holder->write(json2);
             QJsonDocument doc(json2);
@@ -124,7 +125,6 @@ int Server::run() {
             QString qstr = QString(ba);
             string str = qstr.toStdString();
             send(clientSocket, str.c_str(), str.size() + 1, 0);
-            tail->changeTurns();
             // Close the socket
             close(clientSocket);
         }else if (!holder->getTurn() && holder->getCodeToEnter() == gameData->getRoomCode() && tail->checkAllUpdated() && gameData->getNumberOfPlayers() == gameData->getMaxNumberOfPlayers()){

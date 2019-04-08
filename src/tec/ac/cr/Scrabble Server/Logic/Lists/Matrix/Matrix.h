@@ -47,7 +47,7 @@ public:
     void initialize();
     bool checkPlay(LastPlayList* lastPlayList);
     void searchWords(int row, int column);
-    int calculatePoints(LastPlayList* lastPlayList, LetterList* letterList);
+    int calculatePoints(LastPlayList* lastPlayList, LetterList* letterList, int points);
 
 
 private:

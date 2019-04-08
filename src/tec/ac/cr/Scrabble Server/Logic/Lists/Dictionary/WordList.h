@@ -15,6 +15,7 @@ class WordList {
 public:
 
     static WordList* getInstance();
+    static void reset();
 
     WordNode* head = nullptr;
 

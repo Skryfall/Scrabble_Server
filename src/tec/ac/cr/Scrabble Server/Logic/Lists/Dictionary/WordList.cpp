@@ -19,6 +19,10 @@ WordList* WordList::getInstance() {
     return wordList;
 }
 
+void WordList::reset() {
+    wordList = new(wordList) WordList;
+}
+
 int WordList::getLenght() {
     return this->lenght;
 }
